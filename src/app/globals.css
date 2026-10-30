@@ -1,26 +1,96 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui/theme" {
+  name: "booknook";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: oklch(98% 0.012 85);
+  --color-base-200: oklch(95% 0.02 85);
+  --color-base-300: oklch(90% 0.03 80);
+  --color-base-content: oklch(27% 0.03 60);
+  --color-primary: oklch(42% 0.09 165);
+  --color-primary-content: oklch(98% 0.01 165);
+  --color-secondary: oklch(58% 0.12 55);
+  --color-secondary-content: oklch(98% 0.01 55);
+  --color-accent: oklch(72% 0.13 80);
+  --color-accent-content: oklch(25% 0.04 80);
+  --color-neutral: oklch(30% 0.03 60);
+  --color-neutral-content: oklch(96% 0.01 85);
+  --color-info: oklch(65% 0.12 235);
+  --color-info-content: oklch(98% 0.01 235);
+  --color-success: oklch(62% 0.15 150);
+  --color-success-content: oklch(98% 0.01 150);
+  --color-warning: oklch(80% 0.15 80);
+  --color-warning-content: oklch(25% 0.05 80);
+  --color-error: oklch(58% 0.2 27);
+  --color-error-content: oklch(98% 0.01 27);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "booknook-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: oklch(24% 0.02 160);
+  --color-base-200: oklch(21% 0.02 160);
+  --color-base-300: oklch(17% 0.02 160);
+  --color-base-content: oklch(94% 0.015 85);
+  --color-primary: oklch(72% 0.12 165);
+  --color-primary-content: oklch(20% 0.04 165);
+  --color-secondary: oklch(72% 0.12 60);
+  --color-secondary-content: oklch(20% 0.04 60);
+  --color-accent: oklch(78% 0.12 80);
+  --color-accent-content: oklch(22% 0.04 80);
+  --color-neutral: oklch(32% 0.02 160);
+  --color-neutral-content: oklch(94% 0.015 85);
+  --color-info: oklch(72% 0.12 235);
+  --color-info-content: oklch(20% 0.04 235);
+  --color-success: oklch(70% 0.15 150);
+  --color-success-content: oklch(20% 0.04 150);
+  --color-warning: oklch(82% 0.15 80);
+  --color-warning-content: oklch(25% 0.05 80);
+  --color-error: oklch(68% 0.19 27);
+  --color-error-content: oklch(20% 0.04 27);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-playfair);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+/* One heading style for every section title on the site */
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
 }
