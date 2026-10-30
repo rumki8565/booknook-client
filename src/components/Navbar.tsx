@@ -57,13 +57,13 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
 
   return (
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/90 backdrop-blur">
-      <div className="navbar mx-auto max-w-7xl px-4">
-        <div className="navbar-start gap-1">
+      <div className="navbar mx-auto max-w-7xl px-2 sm:px-4">
+        <div className="navbar-start w-auto flex-1 gap-1 lg:w-1/2 lg:flex-none">
           <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-square"
+              className="btn btn-ghost btn-square btn-sm sm:btn-md"
               aria-label="Open menu"
             >
               <FaBars />
@@ -73,6 +73,11 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
               className="menu dropdown-content z-10 mt-3 w-56 rounded-box border border-base-300 bg-base-100 p-2 shadow"
             >
               {links}
+              {!user && (
+                <li className="sm:hidden">
+                  <Link href="/register">Register</Link>
+                </li>
+              )}
             </ul>
           </div>
           <Logo />
@@ -82,7 +87,7 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
           <ul className="menu menu-horizontal gap-1 px-1">{links}</ul>
         </nav>
 
-        <div className="navbar-end gap-2">
+        <div className="navbar-end w-auto shrink-0 gap-2 lg:w-1/2">
           {user ? (
             <div className="dropdown dropdown-end">
               <div
@@ -130,7 +135,7 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
               </Link>
               <Link
                 href="/register"
-                className="btn btn-primary btn-sm sm:btn-md"
+                className="btn btn-primary btn-sm hidden sm:inline-flex sm:btn-md"
               >
                 Register
               </Link>
