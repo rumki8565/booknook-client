@@ -94,3 +94,19 @@ h4 {
   line-height: 1.2;
   color: var(--color-primary);
 }
+
+/* Hero slider colors */
+.swiper {
+  --swiper-theme-color: #fbbf24;
+  --swiper-navigation-color: #ffffff;
+  --swiper-pagination-color: #fbbf24;
+  --swiper-pagination-bullet-inactive-color: #ffffff;
+}
+
+/* Hide the arrows on phones so they do not cover the text */
+@media (max-width: 639px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+}
