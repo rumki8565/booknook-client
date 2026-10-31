@@ -1,8 +1,6 @@
 import { cache } from "react";
 import type { Book } from "@/types/book";
-
-export const API_URL: string =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+import { API_URL } from "./config";
 
 // limit is optional: getBooks(6) gives the 6 newest books
 export async function getBooks(limit?: number): Promise<Book[]> {

@@ -5,6 +5,14 @@ export type BookCategory =
   | "Kids"
   | "Others";
 
+export const bookCategories: BookCategory[] = [
+  "Fiction",
+  "Science",
+  "History",
+  "Kids",
+  "Others",
+];
+
 export interface Book {
   _id: string;
   title: string;
