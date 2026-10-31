@@ -1,3 +1,4 @@
+import type { Book } from "@/types/book";
 import { API_URL } from "./config";
 
 async function getToken(): Promise<string> {
@@ -45,4 +46,18 @@ export async function authFetch<T>(
   }
 
   return data as T;
+}
+
+// Public route: books added by one user
+export async function fetchBooksByEmail(email: string): Promise<Book[]> {
+  const response: Response = await fetch(
+    `${API_URL}/books?email=${encodeURIComponent(email)}`,
+    { cache: "no-store" },
+  );
+
+  if (!response.ok) {
+    throw new Error("Could not load your books.");
+  }
+
+  return (await response.json()) as Book[];
 }
