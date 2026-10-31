@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { JSX } from "react";
+import BorrowSection from "@/components/BorrowSection";
 import { getBook } from "@/lib/api";
 import type { Book } from "@/types/book";
 
@@ -40,8 +41,6 @@ export default async function BookDetailsPage({
   if (!book) {
     notFound();
   }
-
-  const isAvailable: boolean = book.availableCopies > 0;
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12">
@@ -88,16 +87,7 @@ export default async function BookDetailsPage({
             </div>
           </dl>
 
-          {/* Step 11 replaces this block with the borrow modal */}
-          {isAvailable ? (
-            <button type="button" className="btn btn-primary w-full sm:w-fit">
-              Borrow This Book
-            </button>
-          ) : (
-            <button type="button" disabled className="btn w-full sm:w-fit">
-              Not Available
-            </button>
-          )}
+          <BorrowSection book={book} />
         </div>
       </div>
     </section>
