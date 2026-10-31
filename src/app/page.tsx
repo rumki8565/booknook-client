@@ -1,12 +1,27 @@
 import type { JSX } from "react";
+import HeroSlider from "@/components/home/HeroSlider";
+import HowItWorks from "@/components/home/HowItWorks";
+import NewArrivals from "@/components/home/NewArrivals";
+import TopCategories from "@/components/home/TopCategories";
+import { getBooks } from "@/lib/api";
+import type { Book } from "@/types/book";
 
-export default function HomePage(): JSX.Element {
+export default async function HomePage(): Promise<JSX.Element> {
+  let books: Book[] = [];
+  let hasError: boolean = false;
+
+  try {
+    books = await getBooks(6);
+  } catch {
+    hasError = true;
+  }
+
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
-      <h1 className="section-title">Welcome to BookNook</h1>
-      <p className="mt-3 text-base-content/70">
-        Add a book, borrow a book, return a book.
-      </p>
-    </section>
+    <>
+      <HeroSlider />
+      <NewArrivals books={books} hasError={hasError} />
+      <HowItWorks />
+      <TopCategories />
+    </>
   );
 }
