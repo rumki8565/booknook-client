@@ -32,7 +32,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col bg-base-100 text-base-content antialiased">
-        <Navbar user={null} />
+        <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <Toaster position="top-center" />

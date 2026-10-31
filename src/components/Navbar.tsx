@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { JSX } from "react";
+import toast from "react-hot-toast";
 import { FaBars } from "react-icons/fa6";
+import { authClient } from "@/lib/auth-client";
 import Logo from "./Logo";
 
-export interface NavUser {
+interface NavUser {
   name: string;
   email: string;
   image: string | null;
@@ -26,12 +28,26 @@ const navItems: NavItem[] = [
   { label: "My Borrows", href: "/my-borrows", isPrivate: true },
 ];
 
-interface NavbarProps {
-  user: NavUser | null;
+// Close a daisyUI dropdown after a click
+function closeMenu(): void {
+  const active: Element | null = document.activeElement;
+  if (active instanceof HTMLElement) {
+    active.blur();
+  }
 }
 
-export default function Navbar({ user }: NavbarProps): JSX.Element {
+export default function Navbar(): JSX.Element {
   const pathname: string = usePathname();
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+
+  const user: NavUser | null = session
+    ? {
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image ?? null,
+      }
+    : null;
 
   const visibleItems: NavItem[] = navItems.filter(
     (item: NavItem): boolean => !item.isPrivate || user !== null,
@@ -40,11 +56,24 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
   const isActive = (href: string): boolean =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  const handleLogout = async (): Promise<void> => {
+    closeMenu();
+    const { error } = await authClient.signOut();
+    if (error) {
+      toast.error("Logout failed. Please try again.");
+      return;
+    }
+    toast.success("You have been logged out.");
+    router.push("/");
+    router.refresh();
+  };
+
   const links: JSX.Element[] = visibleItems.map(
     (item: NavItem): JSX.Element => (
       <li key={item.href}>
         <Link
           href={item.href}
+          onClick={closeMenu}
           className={
             isActive(item.href) ? "bg-primary text-primary-content" : ""
           }
@@ -73,9 +102,11 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
               className="menu dropdown-content z-10 mt-3 w-56 rounded-box border border-base-300 bg-base-100 p-2 shadow"
             >
               {links}
-              {!user && (
+              {!isPending && !user && (
                 <li className="sm:hidden">
-                  <Link href="/register">Register</Link>
+                  <Link href="/register" onClick={closeMenu}>
+                    Register
+                  </Link>
                 </li>
               )}
             </ul>
@@ -88,7 +119,9 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
         </nav>
 
         <div className="navbar-end w-auto shrink-0 gap-2 lg:w-1/2">
-          {user ? (
+          {isPending ? (
+            <div className="skeleton h-10 w-24 rounded-field" />
+          ) : user ? (
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -117,11 +150,14 @@ export default function Navbar({ user }: NavbarProps): JSX.Element {
               >
                 <li className="menu-title text-base-content">{user.name}</li>
                 <li>
-                  <Link href="/profile">My Profile</Link>
+                  <Link href="/profile" onClick={closeMenu}>
+                    My Profile
+                  </Link>
                 </li>
                 <li>
-                  {/* Logout is connected in Step 6 */}
-                  <button type="button">Logout</button>
+                  <button type="button" onClick={handleLogout}>
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>
