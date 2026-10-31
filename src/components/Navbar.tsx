@@ -87,7 +87,7 @@ export default function Navbar(): JSX.Element {
   return (
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/90 backdrop-blur">
       <div className="navbar mx-auto max-w-7xl px-2 sm:px-4">
-        <div className="navbar-start w-auto flex-1 gap-1 lg:w-1/2 lg:flex-none">
+        <div className="navbar-start w-auto flex-1 gap-1 lg:w-1/2 lg:flex-initial">
           <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
@@ -118,7 +118,7 @@ export default function Navbar(): JSX.Element {
           <ul className="menu menu-horizontal gap-1 px-1">{links}</ul>
         </nav>
 
-        <div className="navbar-end w-auto shrink-0 gap-2 lg:w-1/2">
+        <div className="navbar-end w-auto shrink-0 gap-2 lg:w-1/2 lg:shrink">
           {isPending ? (
             <div className="skeleton h-10 w-24 rounded-field" />
           ) : user ? (
