@@ -31,7 +31,10 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-screen flex-col bg-base-100 text-base-content antialiased">
+      <body
+        className="flex min-h-screen flex-col bg-base-100 text-base-content antialiased"
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
