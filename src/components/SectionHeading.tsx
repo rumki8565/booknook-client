@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import FadeIn from "./FadeIn";
 
 interface SectionHeadingProps {
   title: string;
@@ -10,9 +11,9 @@ export default function SectionHeading({
   subtitle,
 }: SectionHeadingProps): JSX.Element {
   return (
-    <div className="mb-10 text-center">
+    <FadeIn className="mb-10 text-center">
       <h2 className="section-title">{title}</h2>
       <p className="mx-auto mt-3 max-w-2xl text-base-content/70">{subtitle}</p>
-    </div>
+    </FadeIn>
   );
 }

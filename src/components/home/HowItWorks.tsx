@@ -6,6 +6,7 @@ import {
   FaRotateLeft,
 } from "react-icons/fa6";
 import SectionHeading from "../SectionHeading";
+import FadeIn from "../FadeIn";
 
 interface Step {
   title: string;
@@ -42,19 +43,18 @@ export default function HowItWorks(): JSX.Element {
         <div className="grid gap-6 md:grid-cols-3">
           {steps.map(
             ({ title, text, Icon }: Step, index: number): JSX.Element => (
-              <div
-                key={title}
-                className="flex h-full flex-col items-center rounded-box border border-base-300 bg-base-100 p-8 text-center shadow-sm"
-              >
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl text-primary-content">
-                  <Icon aria-hidden="true" />
-                </span>
-                <p className="mt-4 text-sm font-semibold text-secondary">
-                  Step {index + 1}
-                </p>
-                <h3 className="mt-1 text-xl font-bold">{title}</h3>
-                <p className="mt-2 text-base-content/70">{text}</p>
-              </div>
+              <FadeIn key={title} delay={index * 0.1} className="h-full">
+                <div className="flex h-full flex-col items-center rounded-box border border-base-300 bg-base-100 p-8 text-center shadow-sm">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl text-primary-content">
+                    <Icon aria-hidden="true" />
+                  </span>
+                  <p className="mt-4 text-sm font-semibold text-secondary">
+                    Step {index + 1}
+                  </p>
+                  <h3 className="mt-1 text-xl font-bold">{title}</h3>
+                  <p className="mt-2 text-base-content/70">{text}</p>
+                </div>
+              </FadeIn>
             ),
           )}
         </div>

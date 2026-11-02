@@ -1,3 +1,4 @@
+import FadeIn from "../FadeIn";
 import Link from "next/link";
 import type { JSX } from "react";
 import type { Book } from "@/types/book";
@@ -37,8 +38,14 @@ export default function NewArrivals({
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {books.map(
-              (book: Book): JSX.Element => (
-                <BookCard key={book._id} book={book} />
+              (book: Book, index: number): JSX.Element => (
+                <FadeIn
+                  key={book._id}
+                  delay={(index % 3) * 0.1}
+                  className="h-full"
+                >
+                  <BookCard book={book} />
+                </FadeIn>
               ),
             )}
           </div>
