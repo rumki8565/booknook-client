@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { FaBars } from "react-icons/fa6";
 import { authClient } from "@/lib/auth-client";
 import Logo from "./Logo";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavUser {
   name: string;
@@ -119,6 +120,7 @@ export default function Navbar(): JSX.Element {
         </nav>
 
         <div className="navbar-end w-auto shrink-0 gap-2 lg:w-1/2 lg:shrink">
+          <ThemeToggle />
           {isPending ? (
             <div className="skeleton h-10 w-24 rounded-field" />
           ) : user ? (
