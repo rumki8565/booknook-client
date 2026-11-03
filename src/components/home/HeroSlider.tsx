@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSyncExternalStore } from "react";
 import type { JSX } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -32,13 +33,37 @@ const slides: Slide[] = [
   },
 ];
 
+const WIDE_SCREEN_QUERY: string = "(min-width: 640px)";
+
+function subscribe(onChange: () => void): () => void {
+  const query: MediaQueryList = window.matchMedia(WIDE_SCREEN_QUERY);
+  query.addEventListener("change", onChange);
+  return (): void => query.removeEventListener("change", onChange);
+}
+
+function getSnapshot(): boolean {
+  return window.matchMedia(WIDE_SCREEN_QUERY).matches;
+}
+
+function getServerSnapshot(): boolean {
+  return false;
+}
+
 export default function HeroSlider(): JSX.Element {
+  // Arrows only on wider screens, so they never cover the text on phones
+  const showArrows: boolean = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
+
   return (
     <section className="mx-auto max-w-7xl px-4 pt-6">
       <Swiper
+        key={showArrows ? "with-arrows" : "no-arrows"}
         modules={[Autoplay, Navigation, Pagination]}
         loop
-        navigation
+        navigation={showArrows}
         pagination={{ clickable: true }}
         autoplay={{ delay: 4500, disableOnInteraction: false }}
         className="overflow-hidden rounded-box"

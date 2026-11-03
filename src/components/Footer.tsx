@@ -43,7 +43,7 @@ export default function Footer(): JSX.Element {
           <ul className="space-y-2 text-sm text-base-content/80">
             <li className="flex items-center gap-2">
               <FaEnvelope aria-hidden="true" className="text-primary" />
-              hello@booknook.app
+              hello@booknook.example
             </li>
             <li className="flex items-center gap-2">
               <FaPhone aria-hidden="true" className="text-primary" />

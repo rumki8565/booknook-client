@@ -95,18 +95,19 @@ h4 {
   color: var(--color-primary);
 }
 
-/* Hero slider colors */
+/* Hero slider colors and arrow size */
 .swiper {
   --swiper-theme-color: #fbbf24;
   --swiper-navigation-color: #ffffff;
+  --swiper-navigation-size: 28px;
   --swiper-pagination-color: #fbbf24;
   --swiper-pagination-bullet-inactive-color: #ffffff;
 }
 
 /* Hide the arrows on phones so they do not cover the text */
 @media (max-width: 639px) {
-  .swiper-button-prev,
-  .swiper-button-next {
+  .swiper .swiper-button-prev,
+  .swiper .swiper-button-next {
     display: none;
   }
 }
