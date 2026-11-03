@@ -10,6 +10,7 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import Logo from "./Logo";
+import Link from "next/link";
 
 interface SocialLink {
   label: string;
@@ -78,7 +79,10 @@ export default function Footer(): JSX.Element {
       </div>
 
       <div className="border-t border-base-300 py-4 text-center text-sm text-base-content/70">
-        © {year} BookNook. All rights reserved.
+        © {year} BookNook. All rights reserved.{" "}
+        <Link href="/privacy" className="link link-hover">
+          Privacy Policy
+        </Link>
       </div>
     </footer>
   );
