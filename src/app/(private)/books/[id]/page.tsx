@@ -53,7 +53,7 @@ export default async function BookDetailsPage({
         <img
           src={book.image}
           alt={book.title}
-          className="h-80 w-full rounded-box object-cover sm:h-[28rem] md:h-full md:max-h-[34rem]"
+          className="h-80 w-full rounded-box object-contain sm:h-[28rem] md:h-full md:max-h-[34rem]"
         />
 
         <div className="flex flex-col gap-4">
