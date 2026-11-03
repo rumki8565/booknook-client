@@ -14,7 +14,7 @@ export default function BookCard({ book }: BookCardProps): JSX.Element {
         src={book.image}
         alt={book.title}
         loading="lazy"
-        className="h-64 w-full object-cover"
+        className="h-64 w-full object-contain"
       />
       <div className="flex flex-1 flex-col gap-2 p-5">
         <span className="badge badge-secondary badge-soft w-fit">
